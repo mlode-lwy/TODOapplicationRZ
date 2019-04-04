@@ -37,7 +37,6 @@ class UserControllerTest {
 
     }
 
-
     @Test
     void checkIfLoginExists() {
         assertAll("First should return true, Second should return false",
