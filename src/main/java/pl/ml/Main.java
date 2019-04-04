@@ -21,7 +21,7 @@ public class Main {
         BasicConfigurator.configure();
         logger.setLevel(Level.ALL);
 //        UserController.registerUser();
-        UserController.checkIfLoginExists("Janusz");
+        UserController.checkIfLoginExists("dfs");
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
