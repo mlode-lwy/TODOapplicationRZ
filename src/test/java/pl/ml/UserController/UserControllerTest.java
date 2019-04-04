@@ -49,6 +49,8 @@ class UserControllerTest {
     void checkIfLoginMatchesPassword() {
         assertAll("First should return true, Second should return false",
                 () -> assertTrue(UserController.checkIfLoginMatchesPassword("Janusz", "dupa")),
+                () -> assertFalse(UserController.checkIfLoginMatchesPassword("Janusz", "wrongPassword")),
+                () -> assertFalse(UserController.checkIfLoginMatchesPassword("wrongLogin", "dupa")),
                 () -> assertFalse(UserController.checkIfLoginMatchesPassword("wrongLogin", "wrongPassword")));
     }
 
