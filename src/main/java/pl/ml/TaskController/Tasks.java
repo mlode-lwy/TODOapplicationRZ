@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "tasks")
-public class TaskController {
+public class Tasks {
 
     @Id
     @Column
