@@ -103,4 +103,71 @@ public class UserController {
         }
         return false;
     }
+
+    public static void removeUser(String userName, String password) {
+        if (checkIfLoginExists(userName)) {
+            if (checkIfLoginMatchesPassword(userName, password)) {
+                session = HibernateUtil
+                        .getSessionFactory()
+                        .openSession();
+                session.beginTransaction();
+
+                Users user;
+                user = (Users) session.createQuery(
+                        "FROM Users "
+                                + "WHERE USER_NAME = '"
+                                + userName
+                                + "'"
+                                + " AND PASSWORD = '"
+                                + password
+                                + "'")
+                        .getSingleResult();
+
+                logger.log(Level.INFO, "Your account has been removed!");
+                session.delete(user);
+                session.getTransaction().commit();
+                session.close();
+                //TODO move to loginScene
+            } else {
+                logger.log(Level.INFO, "Wrong password!");
+            }
+        } else {
+            logger.log(Level.INFO, "Wrong login!");
+        }
+    }
+
+    public static void editUser(String userName, String password, String firstName, String lastName) {
+        if (checkIfLoginExists(userName)) {
+            if (checkIfLoginMatchesPassword(userName, password)) {
+                session = HibernateUtil
+                        .getSessionFactory()
+                        .openSession();
+                session.beginTransaction();
+
+                Users user;
+                user = (Users) session.createQuery(
+                        "FROM Users "
+                                + "WHERE USER_NAME = '"
+                                + userName
+                                + "'"
+                                + " AND PASSWORD = '"
+                                + password
+                                + "'")
+                        .getSingleResult();
+
+                logger.log(Level.INFO, "Your account has been edited!");
+
+                user.setUserName(userName);
+                user.setPassword(password);
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                session.update(user);
+                session.getTransaction().commit();
+                session.close();
+                //TODO close scene
+            } else {
+                logger.log(Level.INFO, "Wrong login!");
+            }
+        }
+    }
 }

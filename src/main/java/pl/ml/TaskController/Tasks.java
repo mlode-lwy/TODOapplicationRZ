@@ -1,6 +1,5 @@
 package pl.ml.TaskController;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +18,7 @@ public class Tasks {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer task_id;
+    private int task_id;
 
     @Column(name = "TASK_NAME")
     private String taskName;
@@ -31,6 +30,9 @@ public class Tasks {
     private String dueDate;
 
     @Column(name = "STATUS")
-    private String status;
+    private TaskStatus status;
+
+    @Column(name = "USER_ID")
+    private int userId;
 
 }
