@@ -6,26 +6,30 @@ import org.hibernate.Session;
 import pl.ml.HibernateUtil;
 
 import javax.persistence.NoResultException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Remigiusz Zudzin
  */
 public class UserController {
 
+    private static final String PASSWORD_PATTERN = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})";
+
     private static Session session;
 
     private final static Logger logger = Logger.getLogger(UserController.class);
 
-    public static void registerUser() {
+    public static void registerUser(String firstName, String lastName, String userName, String password) {
 
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
         Users user = new Users();
-        user.setFirstName("Jan");
-        user.setLastName("Kowalski");
-        user.setUserName("Janusz");
-        user.setPassword("dupa");
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUserName(userName);
+        user.setPassword(password);
 
         logger.log(Level.WARN, "Dodano: "
                 + " Imię: "
@@ -104,6 +108,35 @@ public class UserController {
         return false;
     }
 
+    public static Users login(String userName, String password) {
+        if (!checkIfLoginExists(userName)) {
+            logger.log(Level.INFO, "Wrong login, or password!");
+        } else {
+            try {
+                session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                Users user = (Users) session.createQuery(
+                        "FROM Users "
+                                + "WHERE USER_NAME = '"
+                                + userName
+                                + "'"
+                                + " AND PASSWORD = '"
+                                + password
+                                + "'")
+                        .getSingleResult();
+                return user;
+            } catch (NoResultException e) {
+                logger.log(Level.INFO,
+                        "Sprawdzono: "
+                                + "HASŁO BŁĘDNE");
+                return null;
+            } finally {
+                session.close();
+            }
+        }
+        return null;
+    }
+
     public static void removeUser(String userName, String password) {
         if (checkIfLoginExists(userName)) {
             if (checkIfLoginMatchesPassword(userName, password)) {
@@ -170,4 +203,12 @@ public class UserController {
             }
         }
     }
+
+    public static boolean checkIfPasswordMatchesPattern(String password) {
+        Matcher matcher = Pattern.compile(PASSWORD_PATTERN).matcher(password);
+        return matcher.matches();
+    }
+
+
+
 }
