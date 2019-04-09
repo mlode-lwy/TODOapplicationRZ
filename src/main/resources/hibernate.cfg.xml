@@ -24,9 +24,9 @@
             root
         </property>
 
-        <mapping class="TasksController.Tasks"></mapping>
+        <mapping class="pl.ml.TaskController.Tasks"/>
 
-        <mapping class="UserController.Users"></mapping>
+        <mapping class="pl.ml.UserController.Users"/>
 
     </session-factory>
 </hibernate-configuration>
