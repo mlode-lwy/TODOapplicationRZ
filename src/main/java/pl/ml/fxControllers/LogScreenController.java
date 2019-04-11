@@ -53,7 +53,7 @@ public class LogScreenController implements Initializable {
 //            alert.setContentText(String.format("Do you want to delete %s %s?",
 //                    user.getFirstName(),
 //                    user.getLastName()));
-            alert.setContentText("BŁĄD");
+            alert.setContentText("Błędny login lub hasło!");
             Optional<ButtonType> result = alert.showAndWait();
         } else {
             userNameField.setText("ZALOGOWANO");
