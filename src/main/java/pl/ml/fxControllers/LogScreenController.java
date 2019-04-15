@@ -38,26 +38,35 @@ public class LogScreenController implements Initializable {
     @FXML
     private Button registerButton;
 
+    RegisterController registerController;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void setLogInButton() {
+    public void setLogInButton() throws IOException {
         Users user = UserController.login(userNameField.getText(), passwordField.getText());
         if (user == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Logowanie nieudane!");
             alert.setHeaderText(null);
-//            alert.setContentText(String.format("Do you want to delete %s %s?",
-//                    user.getFirstName(),
-//                    user.getLastName()));
             alert.setContentText("Błędny login lub hasło!");
             Optional<ButtonType> result = alert.showAndWait();
         } else {
-            userNameField.setText("ZALOGOWANO");
-        }//TODO
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/tasks.fxml"));
+            loader.load();
+            Parent root = loader.getRoot();
+            TaskSceneController taskSceneController = loader.getController();
+            taskSceneController.setUser(user);
+            Stage stage = (Stage) logInButton.getScene().getWindow();
+            stage.close();
+            Stage taskStage = new Stage();
+            taskStage.setScene(new Scene(root));
+            taskStage.show();
+        }
     }
 
     public void setRegistryButton() throws IOException {
