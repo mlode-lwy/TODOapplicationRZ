@@ -1,16 +1,11 @@
 package pl.ml.TaskController;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 /**
  * @author Remigiusz Zudzin
  */
 
-@Data
-@NoArgsConstructor
 @Entity
 @Table(name = "tasks")
 public class Tasks {
@@ -30,9 +25,57 @@ public class Tasks {
     private String dueDate;
 
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
     @Column(name = "USER_ID")
     private int userId;
 
+    public int getTask_id() {
+        return task_id;
+    }
+
+    public void setTask_id(int task_id) {
+        this.task_id = task_id;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public String getTaskDesc() {
+        return taskDesc;
+    }
+
+    public void setTaskDesc(String taskDesc) {
+        this.taskDesc = taskDesc;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

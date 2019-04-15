@@ -61,6 +61,7 @@ public class LogScreenController implements Initializable {
             Parent root = loader.getRoot();
             TaskSceneController taskSceneController = loader.getController();
             taskSceneController.setUser(user);
+            taskSceneController.loadTasks();
             Stage stage = (Stage) logInButton.getScene().getWindow();
             stage.close();
             Stage taskStage = new Stage();

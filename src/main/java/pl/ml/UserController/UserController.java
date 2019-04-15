@@ -9,6 +9,8 @@ import javax.persistence.NoResultException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static pl.ml.HibernateUtil.getSessionFactory;
+
 /**
  * @author Remigiusz Zudzin
  */
@@ -22,7 +24,7 @@ public class UserController {
 
     public static void registerUser(String firstName, String lastName, String userName, String password) {
 
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = getSessionFactory().openSession();
         session.beginTransaction();
 
         Users user = new Users();
@@ -46,7 +48,7 @@ public class UserController {
     }
 
     public static void logIn() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = getSessionFactory().openSession();
         session.beginTransaction();
 
     }
@@ -84,7 +86,7 @@ public class UserController {
             logger.log(Level.INFO, "Wrong login, or password!");
         } else {
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
+                session = getSessionFactory().openSession();
                 session.beginTransaction();
                 session.createQuery(
                         "FROM Users "
@@ -113,7 +115,7 @@ public class UserController {
             logger.log(Level.INFO, "Wrong login, or password!");
         } else {
             try {
-                session = HibernateUtil.getSessionFactory().openSession();
+                session = getSessionFactory().openSession();
                 session.beginTransaction();
                 Users user = (Users) session.createQuery(
                         "FROM Users "
@@ -140,8 +142,7 @@ public class UserController {
     public static void removeUser(String userName, String password) {
         if (checkIfLoginExists(userName)) {
             if (checkIfLoginMatchesPassword(userName, password)) {
-                session = HibernateUtil
-                        .getSessionFactory()
+                session = getSessionFactory()
                         .openSession();
                 session.beginTransaction();
 
@@ -172,8 +173,7 @@ public class UserController {
     public static void editUser(String userName, String password, String firstName, String lastName) {
         if (checkIfLoginExists(userName)) {
             if (checkIfLoginMatchesPassword(userName, password)) {
-                session = HibernateUtil
-                        .getSessionFactory()
+                session = getSessionFactory()
                         .openSession();
                 session.beginTransaction();
 

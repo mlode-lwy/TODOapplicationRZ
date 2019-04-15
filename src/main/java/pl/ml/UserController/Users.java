@@ -37,4 +37,11 @@ public class Users {
     @Transient
     private List<Tasks> listOfTasks;
 
+    public List<Tasks> getListOfTasks() {
+        return listOfTasks;
+    }
+
+    public void setListOfTasks(List<Tasks> listOfTasks) {
+        this.listOfTasks = listOfTasks;
+    }
 }

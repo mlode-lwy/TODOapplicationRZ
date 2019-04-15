@@ -17,7 +17,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="142.0" layoutY="54.0" prefHeight="284.0" prefWidth="488.0" style="&#10;" text="Description" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label fx:id="descriptionLabel" alignment="CENTER" layoutX="142.0" layoutY="54.0" prefHeight="284.0" prefWidth="488.0" style="&#10;" text="Description" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
@@ -26,28 +26,28 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="newMenuItem" mnemonicParsing="false" text="New" />
+                        <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="Delete" />
+                        <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Edit" />
+                    <MenuItem fx:id="editMenuItem" mnemonicParsing="false" text="Edit" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="TODO tasks" />
-                        <MenuItem mnemonicParsing="false" text="In Progress" />
-                      <MenuItem mnemonicParsing="false" text="Done! tasks" />
+                    <MenuItem fx:id="toDoTaskMenuItem" mnemonicParsing="false" text="TODO tasks" />
+                        <MenuItem fx:id="inProgressTaskMenuItem" mnemonicParsing="false" text="In Progress" />
+                      <MenuItem fx:id="doneTaskMenuItem" mnemonicParsing="false" text="Done! tasks" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
-            <TableView layoutY="27.0" prefHeight="372.0" prefWidth="133.0">
+            <TableView fx:id="taskTableView" layoutY="27.0" prefHeight="372.0" prefWidth="133.0">
               <columns>
-                <TableColumn prefWidth="132.0" text="Task" />
+                <TableColumn fx:id="taskTableColumn" prefWidth="132.0" text="Task" />
               </columns>
             </TableView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="19.0" prefHeight="35.0" prefWidth="502.0" text="To do!" textAlignment="CENTER" textFill="#006122">
@@ -55,7 +55,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="574.0" layoutY="360.0" mnemonicParsing="false" text="Done!" textFill="#c93194">
+            <Button fx:id="doneButton" layoutX="574.0" layoutY="360.0" mnemonicParsing="false" text="Done!" textFill="#c93194">
                <effect>
                   <Lighting>
                      <bumpInput>
