@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import lombok.Data;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -17,6 +19,8 @@ import pl.ml.UserController.Users;
 import javax.persistence.TypedQuery;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 /**
  * @author Remigiusz Zudzin
@@ -63,7 +67,7 @@ public class TaskSceneController implements Initializable {
     @FXML
     private Button doneButton;
 
-    private ObservableList<Tasks> tasksObservableList = FXCollections.observableArrayList();
+    private ObservableList<Tasks> tasksObservableList = observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -83,5 +87,15 @@ public class TaskSceneController implements Initializable {
         taskTableView.setItems(tasksObservableList);
         taskTableColumn.setText("Nazwa taska");
         taskTableColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTaskName()));
+    }
+
+    public void showTaskDescOnClick(MouseEvent mouseEvent) {
+        Tasks task = taskTableView.getSelectionModel().getSelectedItem();
+        descriptionLabel.setText(task.getTaskDesc());
+    }
+
+    public void setCloseMenuItem() {
+        Stage stage = (Stage) doneButton.getScene().getWindow();
+        stage.close();
     }
 }

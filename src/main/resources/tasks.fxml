@@ -28,7 +28,7 @@
                   <items>
                     <MenuItem fx:id="newMenuItem" mnemonicParsing="false" text="New" />
                         <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="Delete" />
-                        <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
+                        <MenuItem fx:id="closeMenuItem" onAction="#setCloseMenuItem" mnemonicParsing="false" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -45,7 +45,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <TableView fx:id="taskTableView" layoutY="27.0" prefHeight="372.0" prefWidth="133.0">
+            <TableView fx:id="taskTableView" onMouseClicked="#showTaskDescOnClick" layoutY="27.0" prefHeight="372.0" prefWidth="133.0">
               <columns>
                 <TableColumn fx:id="taskTableColumn" prefWidth="132.0" text="Task" />
               </columns>
